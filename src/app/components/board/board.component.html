@@ -1,0 +1,14 @@
+<!-- <div class="row" *ngFor="let row of matrix">
+<div class="col-md-1 col" (click)="print(row.indexOf(col), matrix.indexOf(row))" *ngFor="let col of row" id="1">
+  <div class="card">{{col}}</div>
+</div>
+</div> -->
+
+<div class="row" *ngFor="let col of matrix">
+  <div class="col-md-1" *ngFor="let row of col" >
+    <div class="row"> <div class="card">{{row}}</div></div>
+  </div>
+
+</div>
+
+
