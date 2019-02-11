@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md" *ngFor="let col of matrix; let i = index" id="{{'col' + i}}" #column (click)="this.handleClickOnCol(column.id)">
       <div class="row d-flex justify-content-center" *ngFor="let cell of col" >
-        <div class="card">{{cell.player.id}}</div>
+        <div class="cell">{{cell.player.id}}</div>
       </div>
     </div>
   </div>

@@ -17,7 +17,6 @@ export class RulesService {
     this.numberOfRows = 6;
     this.matrix = this.initMatrix(this.numberOfCols, this.numberOfRows);
     this.TokensByColumn = new Array(this.numberOfCols).fill(0);
-
   }
 
   initMatrix(numberOfCols, numberOfRows) {
@@ -27,12 +26,10 @@ export class RulesService {
       const col = new Array(numberOfRows).fill(null).map(e => (new Cell()));
       matrix.push(col);
     }
-    console.log(matrix);
     return matrix;
   }
 
   isColInsertable(colIndex) {
-    // console.log(this.TokensByColumn, this.numberOfRows);
     return this.TokensByColumn[colIndex] < this.numberOfRows;
   }
 
@@ -49,7 +46,9 @@ export class RulesService {
     this.is4inCol(colIndex, rowIndex);
     this.is4inRow(colIndex, rowIndex);
     this.is4inDiagSlash(colIndex, rowIndex);
+    this.is4inDiagBackSlash(colIndex, rowIndex);
   }
+
   is4inRow(clickedCol, clickedRow) {
     const player = this.turnsService.getActivePlayer();
     let sequenceCounter = 0;
@@ -101,6 +100,28 @@ export class RulesService {
 
 
     for (let col = startingCol, row = startingRow; (col <= finishCol) && (row >= finishRow); col++ , row--) {
+      if (this.matrix[col][row].player === player) {
+        sequenceCounter++;
+      } else {
+        sequenceCounter = 0;
+      }
+      if (sequenceCounter >= 4) {
+        console.log('win!');
+      }
+    }
+  }
+
+  is4inDiagBackSlash(clickedCol, clickedRow) {
+    const player = this.turnsService.getActivePlayer();
+    let sequenceCounter = 0;
+
+    const startingRow = Math.max(0, clickedRow - 3);
+    const finishRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
+    const startingCol = Math.max(0, clickedCol - 3);
+    const finishCol = Math.min(this.numberOfCols - 1, clickedCol + 3);
+
+
+    for (let col = startingCol, row = startingRow; (col <= finishCol) && (row <= finishRow); col++ , row++) {
       if (this.matrix[col][row].player === player) {
         sequenceCounter++;
       } else {
