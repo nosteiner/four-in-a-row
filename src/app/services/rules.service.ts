@@ -35,9 +35,10 @@ export class RulesService {
 
   insertTokenToCol(colIndex) {
     const topEmptyCellIndex = (this.numberOfRows - 1) - this.TokensByColumn[colIndex];
-    const currentCell = this.matrix[colIndex][topEmptyCellIndex];
+    const currentCell: Cell = this.matrix[colIndex][topEmptyCellIndex];
     currentCell.player = this.turnsService.getActivePlayer();
     currentCell.changeState();
+    currentCell.changeColor();
     this.TokensByColumn[colIndex]++;
     this.isVictory(colIndex, topEmptyCellIndex);
   }

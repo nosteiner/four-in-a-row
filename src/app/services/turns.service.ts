@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Player } from './../Player';
+import { ColorsService } from './colors.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class TurnsService {
   players = [];
   private activePlayerIndex: number;
 
-  constructor() {
+  constructor(private colorsService: ColorsService) {
     this.activePlayerIndex = 0;
   }
 
@@ -21,7 +22,7 @@ export class TurnsService {
       if (i === this.activePlayerIndex) {
         this.initFirstPlayer(id);
       } else {
-        this.players[i] = new Player(id);
+        this.players[i] = new Player(id,  this.initColor());
       }
     }
     console.log(this.players);
@@ -40,12 +41,16 @@ export class TurnsService {
   }
 
   initFirstPlayer(id) {
-    const firstPlayer = new Player(id);
+    const firstPlayer = new Player(id,  this.initColor());
     firstPlayer.isTurn = true;
     this.players[this.activePlayerIndex] = firstPlayer;
   }
 
   getActivePlayer() {
     return this.players[this.activePlayerIndex];
+  }
+
+  initColor() {
+    return this.colorsService.generateColor();
   }
 }

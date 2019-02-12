@@ -1,9 +1,22 @@
 .cell {
     height: 50px;
     width: 50px;
-    background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     margin: 5px;
     text-align: center;
   }
+
+  .fall {
+    animation-name: fall-animation;
+    animation-duration: 500ms;
+}
+
+@keyframes fall-animation {
+    from {
+        transform: translateY(-500px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}

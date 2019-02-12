@@ -1,15 +1,18 @@
+import { Color } from './Color';
 
 export class Player {
-constructor(id) {
-this.id = id;
-this.isTurn = false;
-}
 
-id: Number;
-isTurn: Boolean;
+    id: Number;
+    isTurn: Boolean;
+    color: Color;
 
-changeTurn() {
-    this.isTurn = !this.isTurn;
-}
+        constructor(id, color) {
+            this.id = id;
+            this.isTurn = false;
+            this.color = color;
+        }
 
+    changeTurn() {
+        this.isTurn = !this.isTurn;
+    }
 }

@@ -17,9 +17,6 @@ export class ChoosePlayerComponent implements OnInit {
 
   handleStartGame() {
     this.turnsService.createPlayers();
-
-    console.log(this.turnsService.getActivePlayer());
     this.isPlayersInit = true;
   }
-
 }
