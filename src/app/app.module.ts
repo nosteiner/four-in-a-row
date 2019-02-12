@@ -9,6 +9,8 @@ import { BoardComponent } from './components/board/board.component';
 import { ChoosePlayerComponent } from './components/choose-player/choose-player.component';
 import { TokenComponent } from './components/token/token.component';
 import { GameComponent } from './components/game/game.component';
+import { WinComponent } from './win/win.component';
+import { GameOverComponent } from './components/game-over/game-over.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { GameComponent } from './components/game/game.component';
     ChoosePlayerComponent,
     TokenComponent,
     GameComponent,
+    WinComponent,
+    GameOverComponent,
   ],
   imports: [
     BrowserModule,

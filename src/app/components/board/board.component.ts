@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { RulesService } from 'src/app/services/rules.service';
 import { TurnsService } from 'src/app/services/turns.service';
+import { Player } from 'src/app/Player';
 
 @Component({
   selector: 'app-board',
@@ -11,24 +12,29 @@ export class BoardComponent implements OnInit, AfterViewInit {
 
   constructor(private rulesService: RulesService, private turnsService: TurnsService) { }
 
-  event: MouseEvent;
   matrix;
+  isLoadedToken: boolean;
+  winner: Player;
 
   columnsPositions = [];
 
   ngOnInit() {
     this.matrix = this.rulesService.matrix;
+    this.isLoadedToken = true;
   }
 
   ngAfterViewInit() {
     this.setColumnsCoordinates();
   }
 
-  handleClickOnCol(event) {
-    const colIndex = this.columnsPositions.indexOf(this.findColumnByPositionX(event.clientX));
-    if (this.rulesService.isColInsertable(colIndex)) {
-      this.rulesService.insertTokenToCol(colIndex);
-      this.turnsService.switchTurns();
+  handleReleaseToken(event) {
+    if (this.isLoadedToken) {
+      const colIndex = this.columnsPositions.indexOf(this.findColumnByPositionX(event.clientX));
+      if (this.rulesService.isColInsertable(colIndex)) {
+        this.rulesService.insertTokenToCol(colIndex);
+        this.isLoadedToken = false;
+        this.turnsService.switchTurns();
+      }
     }
   }
 
@@ -83,6 +89,10 @@ export class BoardComponent implements OnInit, AfterViewInit {
   }
 
   onResize(event) {
-  this.setColumnsCoordinates();
+    this.setColumnsCoordinates();
+  }
+
+  loadToken() {
+    this.isLoadedToken = true;
   }
 }

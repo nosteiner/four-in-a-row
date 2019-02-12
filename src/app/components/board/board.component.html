@@ -1,8 +1,8 @@
-<div class="container center" (mouseup)="handleClickOnCol($event)" (window:resize)="onResize($event)">
+<div class="container center" (mouseup)="handleReleaseToken($event)" (window:resize)="onResize($event)">
   <div class="row">
     <div class="col slots-col" *ngFor="let col of matrix; let i = index">
     </div>
-    <app-token cdkDragLockAxis="x" cdkDrag></app-token>
+    <app-token (click)="loadToken()" cdkDragLockAxis="x" cdkDrag></app-token>
   </div>
 
   <div class="row">

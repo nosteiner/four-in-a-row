@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Cell } from './../Cell';
 import { TurnsService } from './turns.service';
+import { GameService } from './game.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class RulesService {
   numberOfCols: number;
   TokensByColumn;
 
-  constructor(private turnsService: TurnsService) {
+  constructor(private turnsService: TurnsService, private gameService: GameService) {
     this.numberOfCols = 7;
     this.numberOfRows = 6;
     this.matrix = this.initMatrix(this.numberOfCols, this.numberOfRows);
@@ -40,14 +41,20 @@ export class RulesService {
     currentCell.changeState();
     currentCell.changeColor();
     this.TokensByColumn[colIndex]++;
-    this.isVictory(colIndex, topEmptyCellIndex);
+    if (this.isVictory(colIndex, topEmptyCellIndex)) {
+      this.gameService.Victory();
+    }
   }
 
   isVictory(colIndex, rowIndex) {
-    this.is4inCol(colIndex, rowIndex);
-    this.is4inRow(colIndex, rowIndex);
-    this.is4inDiagSlash(colIndex, rowIndex);
-    this.is4inDiagBackSlash(colIndex, rowIndex);
+    if (this.is4inCol(colIndex, rowIndex) ||
+      this.is4inRow(colIndex, rowIndex) ||
+      this.is4inDiagSlash(colIndex, rowIndex) ||
+      this.is4inDiagBackSlash(colIndex, rowIndex)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   is4inRow(clickedCol, clickedRow) {
@@ -63,7 +70,7 @@ export class RulesService {
         sequenceCounter = 0;
       }
       if (sequenceCounter >= 4) {
-        console.log('win!');
+        return true;
       }
     }
   }
@@ -82,6 +89,7 @@ export class RulesService {
       }
       if (sequenceCounter >= 4) {
         console.log('win!');
+        return true;
       }
     }
   }
@@ -104,6 +112,7 @@ export class RulesService {
       }
       if (sequenceCounter >= 4) {
         console.log('win!');
+        return true;
       }
     }
   }
@@ -126,6 +135,7 @@ export class RulesService {
       }
       if (sequenceCounter >= 4) {
         console.log('win!');
+        return true;
       }
     }
   }
