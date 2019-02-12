@@ -5,18 +5,19 @@
     display: inline-block;
     margin: 5px;
     text-align: center;
+    font-size: 10px
   }
 
-  .fall {
-    animation-name: fall-animation;
-    animation-duration: 500ms;
-}
+//   .fall {
+//     animation-name: fall-animation;
+//     animation-duration: 500ms;
+// }
 
-@keyframes fall-animation {
-    from {
-        transform: translateY(-500px);
-    }
-    to {
-        transform: translateY(0);
-    }
-}
+// @keyframes fall-animation {
+//     from {
+//         transform: translateY(-500px);
+//     }
+//     to {
+//         transform: translateY(0);
+//     }
+// }

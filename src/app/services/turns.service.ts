@@ -25,7 +25,6 @@ export class TurnsService {
         this.players[i] = new Player(id,  this.initColor());
       }
     }
-    console.log(this.players);
   }
 
   switchTurns() {

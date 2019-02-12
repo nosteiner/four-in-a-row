@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TurnsService } from 'src/app/services/turns.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-choose-player',
@@ -8,7 +9,7 @@ import { TurnsService } from 'src/app/services/turns.service';
 })
 export class ChoosePlayerComponent implements OnInit {
 
-  constructor(private turnsService: TurnsService) { }
+  constructor(private turnsService: TurnsService, private router: Router) { }
 
   isPlayersInit = false;
 

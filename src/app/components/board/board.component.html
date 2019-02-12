@@ -1,9 +1,16 @@
 <div class="container">
   <div class="row">
+  
+    <app-token cdkDragLockAxis="x" cdkDrag></app-token>
+ 
+  </div>
+  <div class="row">
     <div class="col-md" *ngFor="let col of matrix; let i = index" id="{{'col' + i}}" #column
       (click)="this.handleClickOnCol(column.id)">
       <div class="row d-flex justify-content-center" *ngFor="let cell of col">
-        <div class="cell empty" [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.R + ',' + cell.color.R +')'}">{{cell.color.R}}{{cell.color.G}}{{cell.color.B}}</div>
+        <div class="cell"
+          [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')'}">
+          {{cell.color.R}}, {{cell.color.G}}, {{cell.color.B}}</div>
       </div>
     </div>
   </div>

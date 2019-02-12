@@ -11,7 +11,7 @@ export class ColorsService {
   emptyCellColor: Color;
 
   constructor() {
-    this.emptyCellColor = new Color(187, 187, 187);
+    this.emptyCellColor = new Color(230, 230, 230);
     this.colors.push(this.emptyCellColor);
   }
 

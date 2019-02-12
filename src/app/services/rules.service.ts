@@ -75,12 +75,8 @@ export class RulesService {
     const startingRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
 
     for (let row = startingRow; row > finishRow; row--) {
-      console.log(clickedCol, row, clickedRow);
-
       if (this.matrix[clickedCol][row].player === player) {
-        console.log(clickedCol, row, clickedRow);
         sequenceCounter++;
-        console.log(sequenceCounter);
       } else {
         sequenceCounter = 0;
       }
