@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TurnsService } from 'src/app/services/turns.service';
 import { Router } from '@angular/router';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-choose-player',
@@ -9,15 +10,12 @@ import { Router } from '@angular/router';
 })
 export class ChoosePlayerComponent implements OnInit {
 
-  constructor(private turnsService: TurnsService, private router: Router) { }
-
-  isPlayersInit = false;
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
   }
 
   handleStartGame() {
-    this.turnsService.createPlayers();
-    this.isPlayersInit = true;
-  }
+    this.gameService.start();
+   }
 }

@@ -1,20 +1,22 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
-export class GameComponent implements OnInit, OnChanges {
+export class GameComponent implements OnInit {
 
-  isStarted: boolean;
-
-  constructor() { }
+  isStart: Boolean;
+  constructor(private gameService: GameService) {
+    this.isStart = false;
+  }
 
   ngOnInit() {
+    this.gameService.isStartObservable.subscribe((boolean) => {
+      this.isStart = boolean;
+    });
   }
 
-  ngOnChanges() {
-
-  }
 }

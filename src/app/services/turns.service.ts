@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Player } from './../Player';
 import { ColorsService } from './colors.service';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,12 @@ export class TurnsService {
   players = [];
   private activePlayerIndex: number;
 
+  turnStartedObservable: Observable<Player>;
+  turnStartedSubject: Subject<Player> =  new Subject<Player>();
+
   constructor(private colorsService: ColorsService) {
     this.activePlayerIndex = 0;
+    this.turnStartedObservable = this.turnStartedSubject.asObservable();
   }
 
   createPlayers() {
@@ -37,6 +42,7 @@ export class TurnsService {
     nextPlayer.isTurn = true;
 
     this.activePlayerIndex = nextPlayerIndex;
+    this.turnStartedSubject.next(nextPlayer);
   }
 
   initFirstPlayer(id) {

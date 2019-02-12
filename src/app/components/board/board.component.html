@@ -9,8 +9,7 @@
       (click)="this.handleClickOnCol(column.id)">
       <div class="row d-flex justify-content-center" *ngFor="let cell of col">
         <div class="cell"
-          [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')'}">
-          {{cell.color.R}}, {{cell.color.G}}, {{cell.color.B}}</div>
+          [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')'}"></div>
       </div>
     </div>
   </div>

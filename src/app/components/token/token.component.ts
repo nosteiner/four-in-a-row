@@ -12,14 +12,16 @@ export class TokenComponent implements OnInit {
   color: Color;
 
   constructor(private turnsService: TurnsService) {
-   }
+  }
 
   ngOnInit() {
-    // this.setTokenColor()
+    this.setTokenColor();
+    this.turnsService.turnStartedObservable.subscribe((player) => {
+      this.color = player.color;
+    });
   }
 
   setTokenColor() {
     this.color = this.turnsService.getActivePlayer().color;
   }
-
 }
