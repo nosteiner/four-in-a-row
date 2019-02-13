@@ -17,18 +17,25 @@ export class GameService {
   isVictoryObservable: Observable<Boolean>;
   isVictorySubject: Subject<Boolean> =  new Subject<Boolean>();
 
+  isDraw: boolean;
+  isDrawObservable: Observable<Boolean>;
+  isDrawSubject: Subject<Boolean> =  new Subject<Boolean>();
+
+
   constructor(private playersService: PlayersService) {
     this.isStart = false;
     this.isVictory = false;
+    this.isDraw = false;
     this.isStartObservable = this.isStartSubject.asObservable();
     this.isVictoryObservable = this.isVictorySubject.asObservable();
+    this.isDrawObservable = this.isDrawSubject.asObservable();
   }
 
   start() {
     this.playersService.createPlayers();
     this.isStart = true;
     this.isStartSubject.next(this.isStart);
-    if (this.isVictory) {
+    if (this.isVictory || this.isDraw) {
       this.restart();
     }
   }
@@ -38,12 +45,16 @@ export class GameService {
     this.isVictorySubject.next(this.isVictory);
   }
 
-  gameOver() {
-
+  draw() {
+    this.isDraw = true;
+    this.isDrawSubject.next(this.isDraw);
   }
 
     restart() {
     this.isVictory = false;
+    this.isDraw = false;
     this.isVictorySubject.next(this.isVictory);
+    this.isDrawSubject.next(this.isDraw);
+
   }
 }

@@ -12,6 +12,7 @@ export class GameComponent implements OnInit {
 
   isStart: Boolean;
   isVictory: Boolean;
+  isDraw: Boolean;
 
   title: String;
   action: String;
@@ -20,6 +21,7 @@ export class GameComponent implements OnInit {
   constructor(private gameService: GameService, private turnsService: TurnsService) {
     this.isStart = false;
     this.isVictory = false;
+    this.isDraw = false;
     this.title = 'Connect 4';
     this.action = 'Start';
     this.color = new Color(255, 0, 0);
@@ -34,6 +36,11 @@ export class GameComponent implements OnInit {
       this.title = 'We have a winner!';
       this.action = 'Play Again';
       this.color = this.turnsService.getActivePlayer().color;
+    });
+    this.gameService.isDrawObservable.subscribe((boolean) => {
+      this.isDraw = boolean;
+      this.title = 'DRAW';
+      this.action = 'Play Again';
     });
   }
 

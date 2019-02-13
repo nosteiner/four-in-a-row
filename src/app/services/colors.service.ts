@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { stringify } from '@angular/compiler/src/util';
 import { Color } from '../Color';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColorsService {
-
   colors = [];
   emptyCellColor: Color;
   boardColor: Color;
@@ -20,11 +18,12 @@ export class ColorsService {
 
   generateColor() {
     const newColor = new Color(this.emptyCellColor.R, this.emptyCellColor.G, this.emptyCellColor.B);
-
-    while (this.isSimilartoColors(newColor) ) {
+    let counter = 0;
+    while (this.isSimilartoColors(newColor) && counter < 50) {
       newColor.R = Math.floor(Math.random() * 256);
       newColor.G = Math.floor(Math.random() * 256);
       newColor.B = Math.floor(Math.random() * 256);
+      counter++;
     }
     this.addToColors(newColor);
     return newColor;
@@ -32,7 +31,7 @@ export class ColorsService {
 
   isSimilartoColors(newColor: Color) {
     for (const color of this.colors) {
-      const threshold = 1;
+      const threshold = 400;
       if (this.calculateDistance(color, newColor) > threshold) {
         return false;
       }
