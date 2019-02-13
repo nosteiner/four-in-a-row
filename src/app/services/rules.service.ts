@@ -69,90 +69,130 @@ export class RulesService {
     }
   }
 
-  is4inRow(clickedCol, clickedRow) {
-    const player = this.turnsService.getActivePlayer();
-    let sequenceCounter = 0;
-    const startingCol = Math.max(0, clickedCol - 3);
-    const finishCol = Math.min(this.numberOfCols - 1 , clickedCol + 3);
+//   is4inRow(clickedCol, clickedRow) {
+//     const player = this.turnsService.getActivePlayer();
+//     let sequenceCounter = 0;
+//     const startingCol = Math.max(0, clickedCol - 3);
+//     const finishCol = Math.min(this.numberOfCols - 1 , clickedCol + 3);
 
-    for (let col = startingCol; col <= finishCol; col++) {
-      if (this.matrix[col][clickedRow].player === player) {
-        console.log(col, clickedRow);
+//     for (let col = startingCol; col >= finishCol; col--) {
+//       if (this.matrix[col][clickedRow].player === player) {
+//         console.log(col, clickedRow);
 
-        sequenceCounter++;
-      } else {
-        sequenceCounter = 0;
-      }
-      if (sequenceCounter >= 4) {
-        return true;
-      }
+//         sequenceCounter++;
+//       } else {
+//         sequenceCounter = 0;
+//       }
+//       if (sequenceCounter >= 4) {
+//         return true;
+//       }
+//     }
+//   }
+
+//   is4inCol(clickedCol, clickedRow) {
+//     const player = this.turnsService.getActivePlayer();
+//     let sequenceCounter = 0;
+//     const finishRow = Math.max(0, clickedRow - 3);
+//     const startingRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
+//     for (let row = startingRow; row >= finishRow; row--) {
+//       if (this.matrix[clickedCol][row].player === player) {
+//         sequenceCounter++;
+//       } else {
+//         sequenceCounter = 0;
+//       }
+//       if (sequenceCounter >= 4) {
+//         console.log('win!');
+//         return true;
+//       }
+//     }
+//   }
+
+//   is4inDiagSlash(clickedCol, clickedRow) {
+//     const player = this.turnsService.getActivePlayer();
+//     let sequenceCounter = 0;
+//     for(let diagonalIndex = -3; diagonalIndex <= 3; diagonalIndex++){
+//         const col = clickedCol + diagonalIndex;
+//         const row = clickedRow - diagonalIndex;
+//         if (col < 0 || col >= this.numberOfCols || row < 0 || row >= this.numberOfRows){
+//             sequenceCounter = 0;
+//             continue;
+//         }
+//         if (this.matrix[col][row].player === player) {
+//             sequenceCounter++;
+//         } 
+//         else {
+//             sequenceCounter = 0;
+//         }
+//         if (sequenceCounter >= 4) {
+//             console.log('win!');
+//             return true;
+//         }
+//     }
+//   }
+
+
+
+//     is4inDiagBackSlash(clickedCol, clickedRow) {
+//         const player = this.turnsService.getActivePlayer();
+//         let sequenceCounter = 0;
+//         for (let diagonalIndex = -3; diagonalIndex <= 3; diagonalIndex++){
+//             const col = clickedCol + diagonalIndex;
+//             const row = clickedRow + diagonalIndex;
+//             if (col < 0 || col >= this.numberOfCols || row < 0 || row >= this.numberOfRows){
+//                 sequenceCounter = 0;
+//                 continue;
+//             }
+//             if (this.matrix[col][row].player === player) {
+//                 sequenceCounter++;
+//             } else {
+//                 sequenceCounter = 0;
+//             }
+//             if (sequenceCounter >= 4) {
+//                 console.log('win!');
+//                 return true;
+//             }
+//         }
+//     }
+
+
+
+
+    is4inRow(clickedCol, clickedRow) {
+        return this.is4inSequence(clickedCol, clickedRow, 1, 0);
     }
-  }
 
-  is4inCol(clickedCol, clickedRow) {
-    const player = this.turnsService.getActivePlayer();
-    let sequenceCounter = 0;
-    const finishRow = Math.max(0, clickedRow - 3);
-    const startingRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
-    for (let row = startingRow; row >= finishRow; row--) {
-      if (this.matrix[clickedCol][row].player === player) {
-        sequenceCounter++;
-      } else {
-        sequenceCounter = 0;
-      }
-      if (sequenceCounter >= 4) {
-        console.log('win!');
-        return true;
-      }
+    is4inCol(clickedCol, clickedRow) {
+        return this.is4inSequence(clickedCol, clickedRow, 0, 1);
     }
-  }
 
-  is4inDiagSlash(clickedCol, clickedRow) {
-    const player = this.turnsService.getActivePlayer();
-    let sequenceCounter = 0;
-
-    const startingRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
-    const finishRow = Math.max(0, clickedRow - 3);
-    const startingCol = Math.max(0, clickedCol - 3);
-    const finishCol = Math.min(this.numberOfCols - 1, clickedCol + 3);
-    console.log('----------')
-
-
-    for (let col = startingCol, row = startingRow; (col <= finishCol) && (row >= finishRow); col++ , row--) {
-      if (this.matrix[col][row].player === player) {
-        sequenceCounter++;
-      } else {
-        sequenceCounter = 0;
-      }
-      if (sequenceCounter >= 4) {
-        console.log('win!');
-        return true;
-      }
+    is4inDiagBackSlash(clickedCol, clickedRow) {
+        return this.is4inSequence(clickedCol, clickedRow, 1, 1);
     }
-  }
 
-  is4inDiagBackSlash(clickedCol, clickedRow) {
-    const player = this.turnsService.getActivePlayer();
-    let sequenceCounter = 0;
-
-    const startingRow = Math.max(0, clickedRow - 3);
-    const finishRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
-    const startingCol = Math.max(0, clickedCol - 3);
-    const finishCol = Math.min(this.numberOfCols - 1, clickedCol + 3);
-
-
-    for (let col = startingCol, row = startingRow; (col <= finishCol) && (row <= finishRow); col++ , row++) {
-      if (this.matrix[col][row].player === player) {
-        sequenceCounter++;
-      } else {
-        sequenceCounter = 0;
-      }
-      if (sequenceCounter >= 4) {
-        console.log('win!');
-        return true;
-      }
+    is4inDiagSlash(clickedCol, clickedRow) {
+        return this.is4inSequence(clickedCol, clickedRow, -1, 1);
     }
-  }
 
 
+    is4inSequence(clickedCol, clickedRow, directionRow, directionCol) {
+        const player = this.turnsService.getActivePlayer();
+        let sequenceCounter = 0;
+        for (let diagonalIndex = -3; diagonalIndex <= 3; diagonalIndex++) {
+            const col = clickedCol + diagonalIndex * directionCol;
+            const row = clickedRow + diagonalIndex * directionRow;
+            if (col < 0 || col >= this.numberOfCols || row < 0 || row >= this.numberOfRows) {
+                sequenceCounter = 0;
+                continue;
+            }
+            if (this.matrix[col][row].player === player) {
+                sequenceCounter++;
+            } else {
+                sequenceCounter = 0;
+            }
+            if (sequenceCounter >= 4) {
+                console.log('win!');
+                return true;
+            }
+        }
+    }
 }
