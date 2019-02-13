@@ -9,31 +9,22 @@ export class ColorsService {
 
   colors = [];
   emptyCellColor: Color;
+  boardColor: Color;
 
   constructor() {
     this.emptyCellColor = new Color(230, 230, 230);
+    this.boardColor = new Color(91, 150, 218);
     this.colors.push(this.emptyCellColor);
+    this.colors.push(this.boardColor);
   }
-
-  // generateRandomColor() {
-  //   const letters = '0123456789ABCDEF';
-  //   let color = '#';
-  //   for (let i = 0; i < 6; i++) {
-  //     color += letters[Math.floor(Math.random() * 16)];
-  //   }
-  //   return color;
-  // }
 
   generateColor() {
     const newColor = new Color(this.emptyCellColor.R, this.emptyCellColor.G, this.emptyCellColor.B);
 
-    let counter = 0;
-    while (this.isSimilartoColors(newColor) === true && counter < 50) {
+    while (this.isSimilartoColors(newColor) ) {
       newColor.R = Math.floor(Math.random() * 256);
       newColor.G = Math.floor(Math.random() * 256);
       newColor.B = Math.floor(Math.random() * 256);
-
-      counter++;
     }
     this.addToColors(newColor);
     return newColor;
@@ -41,8 +32,8 @@ export class ColorsService {
 
   isSimilartoColors(newColor: Color) {
     for (const color of this.colors) {
-      const dValue = 400;
-      if (this.calculateDistance(color, newColor) > dValue) {
+      const threshold = 1;
+      if (this.calculateDistance(color, newColor) > threshold) {
         return false;
       }
     }
@@ -55,6 +46,7 @@ export class ColorsService {
     const deltaB = color1.B - color2.B;
 
     const distance = Math.sqrt(Math.pow(deltaR, 2) + Math.pow(deltaG, 2) + Math.pow(deltaB, 2));
+
     return distance;
   }
 
