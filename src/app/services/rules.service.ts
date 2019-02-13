@@ -8,16 +8,16 @@ import { GameService } from './game.service';
 })
 export class RulesService {
 
-  matrix;
+  matrix = [];
   numberOfRows: number;
   numberOfCols: number;
-  TokensByColumn;
+  tokensByColumn = [];
 
   constructor(private turnsService: TurnsService, private gameService: GameService) {
     this.numberOfCols = 7;
     this.numberOfRows = 6;
     this.matrix = this.initMatrix(this.numberOfCols, this.numberOfRows);
-    this.TokensByColumn = new Array(this.numberOfCols).fill(0);
+    this.tokensByColumn = new Array(this.numberOfCols).fill(0);
   }
 
   initMatrix(numberOfCols, numberOfRows) {
@@ -30,19 +30,25 @@ export class RulesService {
     return matrix;
   }
 
+  resetBoard() {
+    this.matrix = this.initMatrix(this.numberOfCols, this.numberOfRows);
+    this.tokensByColumn = this.tokensByColumn.fill(0);
+    }
+
   isColInsertable(colIndex) {
-    return this.TokensByColumn[colIndex] < this.numberOfRows;
+    return this.tokensByColumn[colIndex] < this.numberOfRows;
   }
 
   insertTokenToCol(colIndex) {
-    const topEmptyCellIndex = (this.numberOfRows - 1) - this.TokensByColumn[colIndex];
+    const topEmptyCellIndex = (this.numberOfRows - 1) - this.tokensByColumn[colIndex];
     const currentCell: Cell = this.matrix[colIndex][topEmptyCellIndex];
     currentCell.player = this.turnsService.getActivePlayer();
     currentCell.changeState();
     currentCell.changeColor();
-    this.TokensByColumn[colIndex]++;
+    this.tokensByColumn[colIndex]++;
     if (this.isVictory(colIndex, topEmptyCellIndex)) {
       this.gameService.Victory();
+      this.resetBoard();
     }
   }
 

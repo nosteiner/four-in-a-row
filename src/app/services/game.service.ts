@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { PlayersService } from './players.service';
 import { TurnsService } from './turns.service';
 import { Observable, Subject } from 'rxjs';
+import { RulesService } from './rules.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,9 @@ export class GameService {
     this.turnsService.createPlayers();
     this.isStart = true;
     this.isStartSubject.next(this.isStart);
+    if(this.isVictory) {
+      this.restart();
+    }
   }
 
   Victory() {
@@ -36,5 +40,10 @@ export class GameService {
 
   gameOver() {
 
+  }
+
+    restart() {
+    this.isVictory = false;
+    this.isVictorySubject.next(this.isVictory);
   }
 }

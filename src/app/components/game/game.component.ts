@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
-import { Player } from 'src/app/Player';
+import { Color } from 'src/app/Color';
+import { TurnsService } from 'src/app/services/turns.service';
 
 @Component({
   selector: 'app-game',
@@ -11,9 +12,17 @@ export class GameComponent implements OnInit {
 
   isStart: Boolean;
   isVictory: Boolean;
-  constructor(private gameService: GameService) {
+
+  title: String;
+  action: String;
+  color: Color;
+
+  constructor(private gameService: GameService, private turnsService: TurnsService) {
     this.isStart = false;
     this.isVictory = false;
+    this.title = 'Connect 4';
+    this.action = 'Start';
+    this.color = new Color(255, 0, 0);
   }
 
   ngOnInit() {
@@ -22,6 +31,9 @@ export class GameComponent implements OnInit {
     });
     this.gameService.isVictoryObservable.subscribe((boolean) => {
       this.isVictory = boolean;
+      this.title = 'We have a winner!';
+      this.action = 'Play Again';
+      this.color = this.turnsService.getActivePlayer().color;
     });
   }
 

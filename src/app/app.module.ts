@@ -6,21 +6,17 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoardComponent } from './components/board/board.component';
-import { ChoosePlayerComponent } from './components/choose-player/choose-player.component';
 import { TokenComponent } from './components/token/token.component';
 import { GameComponent } from './components/game/game.component';
-import { WinComponent } from './win/win.component';
-import { GameOverComponent } from './components/game-over/game-over.component';
+import { StartComponent } from './components/start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
-    ChoosePlayerComponent,
     TokenComponent,
     GameComponent,
-    WinComponent,
-    GameOverComponent,
+    StartComponent,
   ],
   imports: [
     BrowserModule,

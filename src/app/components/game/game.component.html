@@ -1,3 +1,2 @@
 <app-board *ngIf="this.isStart && !this.isVictory"></app-board>
-<app-choose-player *ngIf="!this.isStart"></app-choose-player>
-<app-game-over *ngIf="this.isVictory"></app-game-over>
+<app-start [action]="action"  [title]="title" [color]="color" *ngIf="!this.isStart || this.isVictory"></app-start>

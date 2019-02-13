@@ -1,0 +1,9 @@
+<div class="container center d-flex align-items-center justify-content-center"
+[ngStyle]="{'background-color': 'rgb(' + color.R + ',' + color.G + ',' + color.B +')'}">
+  <div class="row">
+      <div class="col-md flex-column d-flex align-items-center">
+          <h1>{{title}}</h1>
+          <button type="button" mdbBtn color="dark" mdbWavesEffect (click)="this.handleStartGame()">{{action}}</button>
+      </div>
+  </div>
+</div>
