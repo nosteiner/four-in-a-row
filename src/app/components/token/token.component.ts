@@ -10,8 +10,10 @@ import { TurnsService } from 'src/app/services/turns.service';
 export class TokenComponent implements OnInit {
 
   color: Color;
+  animation;
 
   constructor(private turnsService: TurnsService) {
+    this.animation = 'infinite';
   }
 
   ngOnInit() {
@@ -23,5 +25,9 @@ export class TokenComponent implements OnInit {
 
   setTokenColor() {
     this.color = this.turnsService.getActivePlayer().color;
+  }
+
+  stopAnimation() {
+this.animation = 0;
   }
 }

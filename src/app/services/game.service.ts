@@ -28,7 +28,7 @@ export class GameService {
     this.turnsService.createPlayers();
     this.isStart = true;
     this.isStartSubject.next(this.isStart);
-    if(this.isVictory) {
+    if (this.isVictory) {
       this.restart();
     }
   }
