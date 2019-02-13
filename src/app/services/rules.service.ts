@@ -42,14 +42,20 @@ export class RulesService {
   insertTokenToCol(colIndex) {
     const topEmptyCellIndex = (this.numberOfRows - 1) - this.tokensByColumn[colIndex];
     const currentCell: Cell = this.matrix[colIndex][topEmptyCellIndex];
-    currentCell.player = this.turnsService.getActivePlayer();
-    currentCell.changeState();
-    currentCell.changeColor();
+
+    this.setCell(currentCell);
     this.tokensByColumn[colIndex]++;
+
     if (this.isVictory(colIndex, topEmptyCellIndex)) {
       this.gameService.Victory();
       this.resetBoard();
     }
+  }
+
+  setCell(currentCell: Cell) {
+    currentCell.player = this.turnsService.getActivePlayer();
+    currentCell.changeState();
+    currentCell.changeColor();
   }
 
   isVictory(colIndex, rowIndex) {
@@ -67,10 +73,12 @@ export class RulesService {
     const player = this.turnsService.getActivePlayer();
     let sequenceCounter = 0;
     const startingCol = Math.max(0, clickedCol - 3);
-    const finishCol = Math.min(this.numberOfCols, clickedCol + 3);
+    const finishCol = Math.min(this.numberOfCols - 1 , clickedCol + 3);
 
-    for (let col = startingCol; col < finishCol; col++) {
+    for (let col = startingCol; col <= finishCol; col++) {
       if (this.matrix[col][clickedRow].player === player) {
+        console.log(col, clickedRow);
+
         sequenceCounter++;
       } else {
         sequenceCounter = 0;
@@ -113,8 +121,6 @@ export class RulesService {
     for (let col = startingCol, row = startingRow; (col <= finishCol) && (row >= finishRow); col++ , row--) {
       if (this.matrix[col][row].player === player) {
         sequenceCounter++;
-        console.log(col, row)
-
       } else {
         sequenceCounter = 0;
       }
