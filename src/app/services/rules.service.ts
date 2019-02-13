@@ -86,8 +86,7 @@ export class RulesService {
     let sequenceCounter = 0;
     const finishRow = Math.max(0, clickedRow - 3);
     const startingRow = Math.min(this.numberOfRows - 1, clickedRow + 3);
-
-    for (let row = startingRow; row > finishRow; row--) {
+    for (let row = startingRow; row >= finishRow; row--) {
       if (this.matrix[clickedCol][row].player === player) {
         sequenceCounter++;
       } else {
@@ -108,11 +107,14 @@ export class RulesService {
     const finishRow = Math.max(0, clickedRow - 3);
     const startingCol = Math.max(0, clickedCol - 3);
     const finishCol = Math.min(this.numberOfCols - 1, clickedCol + 3);
+    console.log('----------')
 
 
     for (let col = startingCol, row = startingRow; (col <= finishCol) && (row >= finishRow); col++ , row--) {
       if (this.matrix[col][row].player === player) {
         sequenceCounter++;
+        console.log(col, row)
+
       } else {
         sequenceCounter = 0;
       }

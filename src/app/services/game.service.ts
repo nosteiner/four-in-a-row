@@ -17,7 +17,7 @@ export class GameService {
   isVictoryObservable: Observable<Boolean>;
   isVictorySubject: Subject<Boolean> =  new Subject<Boolean>();
 
-  constructor(private turnsService: TurnsService) {
+  constructor(private playersService: PlayersService) {
     this.isStart = false;
     this.isVictory = false;
     this.isStartObservable = this.isStartSubject.asObservable();
@@ -25,7 +25,7 @@ export class GameService {
   }
 
   start() {
-    this.turnsService.createPlayers();
+    this.playersService.createPlayers();
     this.isStart = true;
     this.isStartSubject.next(this.isStart);
     if (this.isVictory) {
