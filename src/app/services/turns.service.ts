@@ -12,7 +12,7 @@ export class TurnsService {
   private activePlayerIndex: number;
 
   turnStartedObservable: Observable<Player>;
-  turnStartedSubject: Subject<Player> =  new Subject<Player>();
+  private turnStartedSubject: Subject<Player> =  new Subject<Player>();
 
   constructor(private colorsService: ColorsService, private playersService: PlayersService) {
     this.activePlayerIndex = 0;
