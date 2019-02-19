@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ColorsService } from './colors.service';
-import { Player } from '../Player';
+import { Player } from '../models/Player';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Player } from './../Player';
+import { Player } from '../models/Player';
 import { ColorsService } from './colors.service';
 import { Observable, Subject } from 'rxjs';
 import { PlayersService } from './players.service';

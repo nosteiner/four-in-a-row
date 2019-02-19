@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { RulesService } from 'src/app/services/rules.service';
 import { TurnsService } from 'src/app/services/turns.service';
-import { Player } from 'src/app/Player';
+import { Player } from 'src/app/models/Player';
 
 @Component({
   selector: 'app-board',

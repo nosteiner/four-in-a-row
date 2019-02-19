@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlayersService } from './players.service';
-import { TurnsService } from './turns.service';
 import { Observable, Subject } from 'rxjs';
-import { RulesService } from './rules.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +9,15 @@ export class GameService {
 
   isStart: boolean;
   isStartObservable: Observable<Boolean>;
-  isStartSubject: Subject<Boolean> =  new Subject<Boolean>();
+  private isStartSubject: Subject<Boolean> = new Subject<Boolean>();
 
   isVictory: boolean;
   isVictoryObservable: Observable<Boolean>;
-  isVictorySubject: Subject<Boolean> =  new Subject<Boolean>();
+  private isVictorySubject: Subject<Boolean> = new Subject<Boolean>();
 
   isDraw: boolean;
   isDrawObservable: Observable<Boolean>;
-  isDrawSubject: Subject<Boolean> =  new Subject<Boolean>();
+  private isDrawSubject: Subject<Boolean> = new Subject<Boolean>();
 
 
   constructor(private playersService: PlayersService) {
@@ -50,11 +48,10 @@ export class GameService {
     this.isDrawSubject.next(this.isDraw);
   }
 
-    restart() {
+  restart() {
     this.isVictory = false;
     this.isDraw = false;
     this.isVictorySubject.next(this.isVictory);
     this.isDrawSubject.next(this.isDraw);
-
   }
 }

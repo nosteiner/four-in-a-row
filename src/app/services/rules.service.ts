@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cell } from './../Cell';
+import { Cell } from '../models/Cell';
 import { TurnsService } from './turns.service';
 import { GameService } from './game.service';
 

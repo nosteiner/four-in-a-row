@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
-import { Color } from 'src/app/Color';
+import { Color } from 'src/app//models/Color';
 import { TurnsService } from 'src/app/services/turns.service';
 
 @Component({
