@@ -10,10 +10,13 @@
     // inset -2px -2px rgba(0, 10, 98, 0.2),
     // inset -3px -3px rgba(0, 10, 98, 0.3),
     // inset -4px -4px rgba(0, 10, 98, 0.4),
-  }
+}
 
-  .center
-{
+.token-row{
+  height: 62px;
+}
+
+.center{
   position: absolute;
   margin: auto;
   top: 0;
@@ -31,14 +34,9 @@
   }
 }
 
-.slots-col{
- height: 70px;
- width: 50px;
-}
-
 app-token{
     position: absolute;
-    left: 6px;
+    left: 5px;
     top: -12px;
     margin-top: 10px;
 }

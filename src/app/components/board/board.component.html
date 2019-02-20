@@ -1,19 +1,17 @@
 <div class="container center" (mouseup)="handleReleaseToken($event)" (window:resize)="onResize($event)">
-  <div class="row">
-    <div class="col slots-col" *ngFor="let col of matrix; let i = index">
-    </div>
+  <div class="row token-row">
     <app-token (click)="loadToken()" cdkDragLockAxis="x" cdkDrag></app-token>
   </div>
 
   <div class="row">
-    <div class="col column" *ngFor="let col of matrix; let i = index" id="{{'col' + i}}" #column  >
+    <div class="col column" *ngFor="let col of matrix; let i = index" id="{{'col' + i}}" #column>
       <div class="row d-flex justify-content-center" *ngFor="let cell of col">
         <div class="cell" *ngIf="!cell.player"
-        [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')'}">
-      </div>
-      <div class="cell" *ngIf="cell.player"
-      [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')',  'box-shadow': 'inset 0 0'}">
-    </div>
+          [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')'}">
+        </div>
+        <div class="cell" *ngIf="cell.player"
+          [ngStyle]="{'background-color': 'rgb(' + cell.color.R + ',' + cell.color.G + ',' + cell.color.B +')',  'box-shadow': 'inset 0 0'}">
+        </div>
       </div>
     </div>
   </div>

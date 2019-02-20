@@ -21,5 +21,5 @@ export class StartComponent implements OnInit {
 
   handleStartGame() {
     this.gameService.start();
-   }
+  }
 }

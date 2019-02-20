@@ -1,3 +1,4 @@
-<div class="animated slideOutRight slow" (mouseenter)="stopAnimation()" [ngStyle]="{'animation-iteration-count': animation}">
-<div class="token" [ngStyle]="{'background-color': 'rgb(' + color.R + ',' + color.G + ',' + color.B +')'}"></div>
+<div class="animated slideOutRight slow" (mouseover)="stopAnimation()"
+    [ngStyle]="{'animation-iteration-count': animationIteration}">
+    <div class="token" [ngStyle]="{'background-color': 'rgb(' + color.R + ',' + color.G + ',' + color.B +')'}"></div>
 </div>
