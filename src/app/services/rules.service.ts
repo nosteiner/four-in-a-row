@@ -96,9 +96,9 @@ export class RulesService {
   is4inSequence(clickedCol, clickedRow, directionRow, directionCol) {
     const player = this.turnsService.getActivePlayer();
     let sequenceCounter = 0;
-    for (let diagonalIndex = -3; diagonalIndex <= 3; diagonalIndex++) {
-      const col = clickedCol + diagonalIndex * directionCol;
-      const row = clickedRow + diagonalIndex * directionRow;
+    for (let indexInLine = -3; indexInLine <= 3; indexInLine++) {
+      const col = clickedCol + indexInLine * directionCol;
+      const row = clickedRow + indexInLine * directionRow;
       if (col < 0 || col >= this.numberOfCols || row < 0 || row >= this.numberOfRows) {
         sequenceCounter = 0;
         continue;
@@ -112,5 +112,6 @@ export class RulesService {
         return true;
       }
     }
+    return false;
   }
 }
